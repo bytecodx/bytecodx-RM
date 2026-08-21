@@ -26,20 +26,33 @@ export const metadata: Metadata = {
     template: `%s | ByteCodX`,
   },
   description: siteConfig.seo.description,
+  applicationName: "ByteCodX",
+  referrer: "origin-when-cross-origin",
   keywords: [
+    "bytecodx",
+    "ByteCodX",
+    "byte codx",
+    "bytecodx.ai",
+    "bytecodx ai",
+    "bytecodx web development",
+    "bytecodx studio",
     "web development",
     "MERN stack",
-    "Next.js",
+    "Next.js web development",
     "full stack development",
     "e-commerce development",
     "custom web applications",
-    "ByteCodX",
     "freelance web developer",
     "Tamil Nadu web developer",
-    "India web development",
+    "India web development agency",
+    "UK web development services",
   ],
-  authors: [{ name: "ByteCodX" }],
+  authors: [{ name: "ByteCodX", url: siteConfig.url }],
   creator: "ByteCodX",
+  publisher: "ByteCodX",
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -61,10 +74,12 @@ export const metadata: Metadata = {
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
     images: [siteConfig.seo.ogImage],
+    creator: "@bytecodx",
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -75,6 +90,42 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdOrganization = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "ByteCodX",
+  alternateName: ["ByteCodX Studio", "ByteCodX AI", "bytecodx", "byte codx"],
+  url: siteConfig.url,
+  logo: `${siteConfig.url}/logo/bytecodx-logo.png`,
+  image: `${siteConfig.url}/og-image.png`,
+  description: siteConfig.description,
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "IN",
+    addressRegion: "Tamil Nadu",
+  },
+  sameAs: ["https://github.com/bytecodx"],
+  priceRange: "$$",
+  knowsAbout: [
+    "Web Development",
+    "MERN Stack Development",
+    "Full-Stack Development",
+    "React",
+    "Next.js",
+    "E-Commerce Solutions",
+    "Custom Web Applications",
+  ],
+};
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "ByteCodX",
+  alternateName: ["bytecodx", "bytecodx.ai"],
+  url: siteConfig.url,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,6 +133,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${firaCode.variable}`}>
+      <head>
+        <meta name="theme-color" content="#020407" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+      </head>
       <body className="antialiased">
         <Navbar />
         <main>{children}</main>
